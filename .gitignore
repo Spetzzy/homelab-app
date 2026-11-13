@@ -18,3 +18,4 @@ backups/
 # Editor and OS files
 .vscode/
 .DS_Store
+.pytest_cache/
