@@ -1,0 +1,18 @@
+groups:
+  - name: homelab-app
+    rules:
+      - alert: AppDown
+        expr: up{job='homelab-app'} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: homelab-app is not responding to Prometheus
+
+      - alert: HighErrorRate
+        expr: sum(rate(flask_http_request_total{status=~'5..'}[1m])) > 0.1
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: homelab-app is returning server errors
